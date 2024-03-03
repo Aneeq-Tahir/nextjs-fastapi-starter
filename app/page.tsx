@@ -1,10 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
+const API_ENDPOINT =
+   process.env.NODE_ENV === "development"
+      ? "http://localhost:8000"
+      : `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
+
 export default async function Home() {
-   let data = await fetch(
-      `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/python`
-   );
+   let data = await fetch(`https://${API_ENDPOINT}/api/python`);
    data = await data.json();
    console.log(data);
    return (
