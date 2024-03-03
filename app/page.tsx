@@ -32,8 +32,8 @@ export default async function Home() {
               height={24}
               priority
             /> */}
-                  {Object.values(data).map((v) => (
-                     <p>{v as string}</p>
+                  {Object.values(data).map((v, i) => (
+                     <p key={i}>{v as string}</p>
                   ))}
                </a>
             </div>
