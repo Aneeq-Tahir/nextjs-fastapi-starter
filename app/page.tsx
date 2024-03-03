@@ -7,7 +7,7 @@ const API_ENDPOINT =
       : `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
 
 export default async function Home() {
-   let data = await fetch(`https://${API_ENDPOINT}/api/python`);
+   let data = await fetch(`${API_ENDPOINT}/api/python`);
    data = await data.json();
    console.log(data);
    return (
