@@ -5,6 +5,7 @@ import {
    CardHeader,
    CardTitle,
 } from "@/components/ui/card";
+
 import { type Todo } from "@/lib/types";
 import { API_ENDPOINT } from "@/lib/utils";
 import TodoDescription from "./todo-description";
@@ -29,7 +30,11 @@ export default async function TodoCard() {
          </CardContent>
          <CardContent className="border-t dark:border-gray-800 pt-4">
             {todos.map((todo) => (
-               <TodoDescription todoId={todo.id} completed={todo.completed}>
+               <TodoDescription
+                  key={todo.id}
+                  todoId={todo.id}
+                  completed={todo.completed}
+               >
                   {todo.description}
                </TodoDescription>
             ))}
