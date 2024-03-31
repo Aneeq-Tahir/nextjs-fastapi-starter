@@ -1,6 +1,6 @@
 import Todo from "@/components/todo";
 
-export default async function Home() {
+export default function Home() {
    // const res = await fetch(`${API_ENDPOINT}/api/python`, { cache: "no-store" });
    // const data = await res.json();
 

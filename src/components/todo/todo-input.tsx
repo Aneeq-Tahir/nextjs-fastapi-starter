@@ -7,13 +7,13 @@ import { useState } from "react";
 const TodoInput = () => {
    const [todo, setTodo] = useState("");
 
-   const addTodo = (description: string, token: string) => {
+   const handleAddTodo = () => {
       fetch(`${API_ENDPOINT}/api/todo`, {
          method: "POST",
          headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer `,
          },
-         body: JSON.stringify({ description }),
+         body: JSON.stringify({ description: todo }),
       });
    };
 
@@ -23,9 +23,10 @@ const TodoInput = () => {
             className="flex-1 min-w-0"
             placeholder="Enter a new task"
             type="text"
+            value={todo}
             onChange={(e) => setTodo(e.target.value)}
          />
-         <Button onClick={() => addTodo(todo, "")} size="icon">
+         <Button onClick={handleAddTodo} size="icon">
             <PlusIcon className="h-4 w-4" />
             <span className="sr-only">Add</span>
          </Button>
@@ -33,7 +34,7 @@ const TodoInput = () => {
    );
 };
 
-export function PlusIcon(props: React.ComponentProps<"svg">) {
+function PlusIcon(props: React.ComponentProps<"svg">) {
    return (
       <svg
          {...props}

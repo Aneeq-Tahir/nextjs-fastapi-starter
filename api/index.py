@@ -41,7 +41,6 @@ async def update_todo(todo_id: int, todo: Todos, db: Session = Depends(get_db), 
     try:
         new_todo = db.exec(select(Todos).where(Todos.id == todo_id)).first()
         if new_todo:
-            new_todo.description = todo.description
             new_todo.completed = todo.completed
             db.commit()
             db.refresh(new_todo)

@@ -5,8 +5,10 @@ from api.db.database import get_db, Users
 from sqlmodel import SQLModel, create_engine, Session, select
 from api.auth import generate_access_token
 from datetime import timedelta
+from dotenv import load_dotenv
 import os
 
+load_dotenv()
 conn_str = os.getenv('TEST_DB_URL')
 
 engine = create_engine(conn_str)

@@ -5,7 +5,7 @@ import os
 load_dotenv()
 
 conn_str = os.getenv('DB')
-
+print(conn_str)
 engine = create_engine(conn_str)
 
 def get_db():
