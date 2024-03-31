@@ -6,6 +6,7 @@ export default function Home() {
 
    return (
       <main className="flex justify-center items-center min-h-screen">
+         {/* @ts-expect-error Server Component */}
          <Todo />
       </main>
    );
