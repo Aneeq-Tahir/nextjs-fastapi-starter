@@ -1,57 +1,45 @@
 "use client";
+import { useFormStatus } from "react-dom";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { API_ENDPOINT } from "@/lib/utils";
-import { useState } from "react";
+import { Loader, PlusIcon } from "@/svgs";
 
-const TodoInput = () => {
-   const [todo, setTodo] = useState("");
+import { addTodo } from "@/lib/actions";
 
-   const handleAddTodo = () => {
-      fetch(`${API_ENDPOINT}/api/todo`, {
-         method: "POST",
-         headers: {
-            Authorization: `Bearer `,
-         },
-         body: JSON.stringify({ description: todo }),
-      });
-   };
+const Submit = () => {
+   const { pending } = useFormStatus();
 
    return (
-      <div className="flex gap-2">
+      <Button
+         disabled={pending}
+         className="disabled:cursor-not-allowed disabled:opacity-70"
+         size="icon"
+      >
+         {pending ? (
+            <Loader className="animate-spin w-4 h-4 text-transparent fill-gray-950" />
+         ) : (
+            <>
+               <PlusIcon className="h-4 w-4" />
+               <span className="sr-only">Add</span>
+            </>
+         )}
+      </Button>
+   );
+};
+
+const TodoInput = () => {
+   return (
+      <form action={addTodo} className="flex gap-2">
          <Input
             className="flex-1 min-w-0"
             placeholder="Enter a new task"
             type="text"
-            value={todo}
-            onChange={(e) => setTodo(e.target.value)}
+            name="todo"
          />
-         <Button onClick={handleAddTodo} size="icon">
-            <PlusIcon className="h-4 w-4" />
-            <span className="sr-only">Add</span>
-         </Button>
-      </div>
+         <Submit />
+      </form>
    );
 };
-
-function PlusIcon(props: React.ComponentProps<"svg">) {
-   return (
-      <svg
-         {...props}
-         xmlns="http://www.w3.org/2000/svg"
-         width="24"
-         height="24"
-         viewBox="0 0 24 24"
-         fill="none"
-         stroke="currentColor"
-         strokeWidth="2"
-         strokeLinecap="round"
-         strokeLinejoin="round"
-      >
-         <path d="M5 12h14" />
-         <path d="M12 5v14" />
-      </svg>
-   );
-}
 
 export default TodoInput;
